@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Your custom styles go here */
+  </style>
+  <title>API Data Display</title>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1>API Data Display</h1>
+
+    <div class="text-center text-sucess" id="apiData1"></div>
+    <div class="text-center text-danger" id="apiData2"></div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Function to fetch data from the API using promises
+    function fetchData(apiUrl, targetElementId) {
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Process and display the necessary information
+          document.getElementById(targetElementId).innerHTML = `<p>${JSON.stringify(data)}</p>`;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          document.getElementById(targetElementId).innerHTML = `<p>Error fetching data</p>`;
+        });
+    }
+
+    // Replace the placeholder URLs with actual API endpoints
+    const apiUrl1 = 'https://jsonplaceholder.typicode.com/todos/1';
+    const apiUrl2 = 'https://bhagavadgita.io/chapter/1';
+  
+
+    // Call the fetchData function for each API
+    fetchData(apiUrl1, 'apiData1');
+    fetchData(apiUrl2, 'apiData2');
+   
+  </script>
+</body>
+</html>
